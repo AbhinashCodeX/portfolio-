@@ -3,9 +3,10 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import './Footer.css';
 
 const quickLinks = [
-  { label: 'Home', href: '#home' },
+  { label: 'Home', href: '#hero' },
   { label: 'About', href: '#about' },
   { label: 'Skills', href: '#skills' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Projects', href: '#projects' },
   { label: 'Contact', href: '#contact' },
 ];
@@ -35,7 +36,7 @@ const Footer = () => {
         <div className="footer-grid">
           {/* Left — Logo & Tagline */}
           <div className="footer-brand">
-            <a href="#home" className="footer-logo">
+            <a href="#hero" className="footer-logo">
               AP
             </a>
             <p className="footer-tagline">
