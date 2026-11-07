@@ -9,7 +9,7 @@ import {
   FaDownload,
   FaAward,
 } from 'react-icons/fa';
-import photoImg from '../../assets/photo_user_clean.png';
+import photoImg from '../../assets/photo.png';
 import './About.css';
 
 const stats = [

@@ -380,6 +380,18 @@
   z-index: 25;
 }
 
+@media (max-width: 640px) {
+  .hero__reveal-container {
+    top: 75px;
+    right: 16px;
+  }
+  .hero__reveal-btn {
+    padding: 8px 16px;
+    font-size: 0.78rem;
+    gap: 6px;
+  }
+}
+
 .hero__reveal-btn {
   display: inline-flex;
   align-items: center;
