@@ -374,7 +374,9 @@ export default function ParticleField({
         className={`portrait-photo-layer ${revealed ? 'active' : ''}`}
         style={{
           opacity: revealProgress > 0.01 ? 1 : 0,
-          clipPath: `polygon(0 0, 100% 0, 100% ${revealProgress * 105}%, 0 ${revealProgress * 105}%)`,
+          clipPath: revealProgress >= 1
+            ? 'none'
+            : `polygon(0 0, 100% 0, 100% ${revealProgress * 105}%, 0 ${revealProgress * 105}%)`,
         }}
       >
         <img
@@ -382,14 +384,16 @@ export default function ParticleField({
           alt="Abhinash Panigrahi - Studio Portrait"
           className="portrait-photo-img"
         />
-        {/* Circle grid mask that grows until circles merge */}
-        <div
-          className="circle-grid-mask"
-          style={{
-            opacity: revealProgress > 0 && revealProgress < 0.95 ? Math.sin(revealProgress * Math.PI) * 0.8 : 0,
-            transform: `scale(${0.85 + revealProgress * 0.3})`,
-          }}
-        />
+        {/* Circle grid mask that dissolves as reveal completes */}
+        {revealProgress > 0 && revealProgress < 0.95 && (
+          <div
+            className="circle-grid-mask"
+            style={{
+              opacity: Math.sin(revealProgress * Math.PI) * 0.7,
+              transform: `scale(${0.9 + revealProgress * 0.25})`,
+            }}
+          />
+        )}
       </div>
 
       {/* ── Layer 3: Three.js WebGL Canvas with Transparent Background ── */}
