@@ -5,7 +5,16 @@
    ═══════════════════════════════════════════════════════════════ */
 import React, { useRef, useState } from 'react';
 import { TypeAnimation } from 'react-type-animation';
-import { FaGithub, FaLinkedin, FaEnvelope, FaMagic, FaUndo } from 'react-icons/fa';
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaMagic,
+  FaUndo,
+  FaDownload,
+  FaBriefcase,
+  FaPaperPlane,
+} from 'react-icons/fa';
 import ParticleField from '../ParticleField/ParticleField';
 import './Hero.css';
 
@@ -41,14 +50,20 @@ export default function Hero() {
           ) : (
             <>
               <FaMagic className="btn-icon pulse" />
-              <span>Reveal</span>
+              <span>Reveal Portrait</span>
             </>
           )}
         </button>
       </div>
 
-      {/* Overlay content */}
+      {/* Overlay content with protective contrast panel */}
       <div className={`hero__content ${revealed ? 'content-dimmed' : ''}`}>
+        {/* Top Distinction Pill */}
+        <div className="hero__badge">
+          <span className="hero__badge-dot" />
+          <span>.NET Full Stack Engineer · MCA Gold Medalist</span>
+        </div>
+
         {/* Greeting */}
         <p className="hero__greeting">Hello, I'm</p>
 
@@ -78,29 +93,56 @@ export default function Hero() {
           <span className="hero__roles-prefix">{' />'}</span>
         </div>
 
-        {/* Tagline */}
-        <p className="hero__tagline">
-          1 year of hands-on experience crafting high-performance, scalable enterprise
-          applications with C#, ASP.NET Core, SQL Server, and modern web architectures.
-        </p>
+        {/* Glassmorphic Protective Panel for Tagline and CTAs */}
+        <div className="hero__panel">
+          <p className="hero__tagline">
+            1 year of hands-on experience crafting high-performance, scalable enterprise
+            applications with <strong>C#</strong>, <strong>ASP.NET Core</strong>, <strong>SQL Server</strong>, and <strong>modern web architectures</strong>.
+          </p>
 
-        {/* CTA Buttons */}
-        <div className="hero__cta">
-          <a href="#projects" className="hero__btn hero__btn--primary">
-            View My Work
-          </a>
-          <button
-            onClick={handleToggleReveal}
-            className="hero__btn hero__btn--reveal"
-          >
-            {revealed ? 'Back to dots' : 'Reveal Portrait'}
-          </button>
-          <a
-            href="#contact"
-            className="hero__btn hero__btn--outline"
-          >
-            Get In Touch
-          </a>
+          {/* CTA Buttons Row */}
+          <div className="hero__cta">
+            <a href="#projects" className="hero__btn hero__btn--primary">
+              <FaBriefcase className="btn-icon" />
+              <span>View My Work</span>
+            </a>
+
+            {/* Dedicated CV / Resume Download Box */}
+            <a
+              href="/Abhinash_Panigrahi_Resume.pdf"
+              download="Abhinash_Panigrahi_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero__btn hero__btn--resume"
+              title="Download Latest Resume"
+            >
+              <FaDownload className="btn-icon download-bounce" />
+              <span>Download CV</span>
+            </a>
+
+            <button
+              onClick={handleToggleReveal}
+              className="hero__btn hero__btn--reveal"
+              title="Toggle 3D Sculpture & Portrait"
+            >
+              {revealed ? (
+                <>
+                  <FaUndo className="btn-icon spin" />
+                  <span>Back to dots</span>
+                </>
+              ) : (
+                <>
+                  <FaMagic className="btn-icon pulse" />
+                  <span>Reveal Portrait</span>
+                </>
+              )}
+            </button>
+
+            <a href="#contact" className="hero__btn hero__btn--outline">
+              <FaPaperPlane className="btn-icon" />
+              <span>Get In Touch</span>
+            </a>
+          </div>
         </div>
 
         {/* Social links */}
@@ -115,7 +157,7 @@ export default function Hero() {
             <FaGithub />
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/abhinash-panigrahi-9a17b626b/"
             className="hero__social-link"
             target="_blank"
             rel="noopener noreferrer"
@@ -124,7 +166,7 @@ export default function Hero() {
             <FaLinkedin />
           </a>
           <a
-            href="mailto:abhinashpanigrahi@example.com"
+            href="mailto:ABHINASHPANIGRAHI9@gmail.com"
             className="hero__social-link"
             aria-label="Email"
           >

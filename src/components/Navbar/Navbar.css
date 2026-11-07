@@ -85,6 +85,47 @@
   box-shadow: 0 0 8px #ff2a55;
 }
 
+/* ---- Navbar Right Actions ---- */
+.navbar__right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar__resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 16px;
+  background: rgba(255, 42, 85, 0.12);
+  border: 1px solid rgba(255, 42, 85, 0.4);
+  border-radius: 20px;
+  color: #ffffff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+}
+
+.navbar__resume-btn:hover {
+  background: #ff2a55;
+  border-color: #ff2a55;
+  box-shadow: 0 0 16px rgba(255, 42, 85, 0.5);
+  transform: translateY(-1px);
+}
+
+.navbar__resume-icon {
+  font-size: 0.75rem;
+  color: #ff3366;
+  transition: color 0.25s ease;
+}
+
+.navbar__resume-btn:hover .navbar__resume-icon {
+  color: #ffffff;
+}
+
 /* ---- Hamburger ---- */
 .navbar__hamburger {
   display: none;
@@ -157,8 +198,33 @@
     display: none;
   }
 
+  .navbar__resume-btn {
+    display: none;
+  }
+
   .navbar__hamburger {
     display: flex;
     align-items: center;
   }
+}
+
+.navbar__drawer-cta {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar__drawer-resume {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: linear-gradient(135deg, #ff2a55 0%, #dc143c 100%);
+  color: #ffffff;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(255, 42, 85, 0.4);
 }

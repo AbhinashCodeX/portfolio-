@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { FaDownload } from 'react-icons/fa';
 import './Navbar.css';
 
 const navLinks = [
@@ -97,14 +98,29 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* Mobile toggle */}
-          <button
-            className="navbar__hamburger"
-            onClick={() => setMobileOpen((v) => !v)}
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <HiX /> : <HiMenuAlt3 />}
-          </button>
+          {/* Right Action / Mobile toggle */}
+          <div className="navbar__right">
+            <a
+              href="/Abhinash_Panigrahi_Resume.pdf"
+              download="Abhinash_Panigrahi_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="navbar__resume-btn"
+              title="Download Resume PDF"
+            >
+              <FaDownload className="navbar__resume-icon" />
+              <span>Resume</span>
+            </a>
+
+            {/* Mobile toggle */}
+            <button
+              className="navbar__hamburger"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <HiX /> : <HiMenuAlt3 />}
+            </button>
+          </div>
         </div>
       </motion.nav>
 
@@ -143,6 +159,17 @@ const Navbar = () => {
                   </motion.li>
                 ))}
               </ul>
+              <div className="navbar__drawer-cta">
+                <a
+                  href="/Abhinash_Panigrahi_Resume.pdf"
+                  download="Abhinash_Panigrahi_Resume.pdf"
+                  className="navbar__drawer-resume"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaDownload /> <span>Download Resume (CV)</span>
+                </a>
+              </div>
             </motion.aside>
           </>
         )}

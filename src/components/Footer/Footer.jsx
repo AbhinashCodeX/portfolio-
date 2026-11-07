@@ -19,12 +19,12 @@ const socialLinks = [
   },
   {
     icon: <FaLinkedin />,
-    href: 'https://linkedin.com/in/abhinashpanigrahi',
+    href: 'https://www.linkedin.com/in/abhinash-panigrahi-9a17b626b/',
     label: 'LinkedIn',
   },
   {
     icon: <FaEnvelope />,
-    href: 'mailto:abhinash.panigrahi@email.com',
+    href: 'mailto:ABHINASHPANIGRAHI9@gmail.com',
     label: 'Email',
   },
 ];

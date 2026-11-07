@@ -86,6 +86,118 @@
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
+.experience__dot.gold-dot {
+  border-color: #facc15;
+  color: #facc15;
+  box-shadow: 0 0 16px rgba(250, 204, 21, 0.65);
+  background: #1e1b10;
+}
+
+.gold-medal-card {
+  border-color: rgba(250, 204, 21, 0.35) !important;
+  background: linear-gradient(145deg, #16151c 0%, #1e1b12 100%) !important;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(250, 204, 21, 0.08) !important;
+}
+
+.experience__role-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.gold-medal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  background: rgba(250, 204, 21, 0.15);
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  border-radius: 20px;
+  color: #facc15;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.gold-tag {
+  color: #facc15 !important;
+  background: rgba(250, 204, 21, 0.1) !important;
+  border-color: rgba(250, 204, 21, 0.3) !important;
+}
+
+/* ── Certifications Grid ── */
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin-top: 1rem;
+}
+
+.cert-card {
+  background: #13131a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 1.4rem;
+  transition: all 0.28s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cert-card:hover {
+  border-color: rgba(255, 42, 85, 0.4);
+  transform: translateY(-3px);
+  background: #171722;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 42, 85, 0.1);
+}
+
+.cert-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cert-icon {
+  font-size: 1.25rem;
+  color: #ff3366;
+}
+
+.cert-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ff3366;
+  background: rgba(255, 42, 85, 0.1);
+  border: 1px solid rgba(255, 42, 85, 0.25);
+  border-radius: 12px;
+  padding: 2px 8px;
+}
+
+.cert-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.cert-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  color: #94a3b8;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .certifications-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .experience__dot-pulse {
   position: absolute;
   inset: -4px;

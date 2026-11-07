@@ -13,8 +13,20 @@ const contactInfo = [
   {
     icon: <FaEnvelope />,
     label: 'Email',
-    value: 'abhinash.panigrahi@email.com',
-    href: 'mailto:abhinash.panigrahi@email.com',
+    value: 'ABHINASHPANIGRAHI9@gmail.com',
+    href: 'mailto:ABHINASHPANIGRAHI9@gmail.com',
+  },
+  {
+    icon: <FaPhone />,
+    label: 'Mobile',
+    value: '+91 7008455023',
+    href: 'tel:+917008455023',
+  },
+  {
+    icon: <FaLinkedin />,
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/abhinash-panigrahi-9a17b626b',
+    href: 'https://www.linkedin.com/in/abhinash-panigrahi-9a17b626b/',
   },
   {
     icon: <FaGithub />,
@@ -23,15 +35,9 @@ const contactInfo = [
     href: 'https://github.com/AbhinashCodeX',
   },
   {
-    icon: <FaLinkedin />,
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/abhinashpanigrahi',
-    href: 'https://linkedin.com/in/abhinashpanigrahi',
-  },
-  {
     icon: <FaMapMarkerAlt />,
     label: 'Location',
-    value: 'India',
+    value: 'Bhubaneswar / Cuttack, Odisha, India',
     href: null,
   },
 ];

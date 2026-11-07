@@ -20,11 +20,40 @@
   z-index: 10;
   text-align: center;
   max-width: 860px;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.1rem;
+  gap: 0.9rem;
+}
+
+/* ── Distinction Pill Badge ── */
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  background: rgba(20, 20, 28, 0.88);
+  border: 1px solid rgba(255, 42, 85, 0.45);
+  border-radius: 30px;
+  color: #ff3366;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 16px rgba(255, 42, 85, 0.25);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out 0.4s forwards;
+}
+
+.hero__badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #ff2a55;
+  box-shadow: 0 0 10px #ff2a55;
 }
 
 /* ── Greeting ── */
@@ -71,7 +100,7 @@
   font-size: clamp(1.1rem, 2.5vw, 1.65rem);
   font-weight: 600;
   color: #ff3366;
-  min-height: 2.2em;
+  min-height: 2em;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -89,91 +118,137 @@
   color: #ff3366;
 }
 
-/* ── Tagline ── */
-.hero__tagline {
-  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
-  color: #cbd5e1;
-  max-width: 620px;
-  line-height: 1.7;
-  font-weight: 400;
+/* ── Glassmorphic Contrast Panel (Eliminates dot bleed & gives 100% sharp text) ── */
+.hero__panel {
+  position: relative;
+  background: rgba(14, 14, 20, 0.84);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 42, 85, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 680px;
+  margin-top: 0.2rem;
   opacity: 0;
   animation: heroFadeUp 0.8s ease-out 1.35s forwards;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
-/* ── CTA Buttons ── */
+/* ── Tagline ── */
+.hero__tagline {
+  font-size: clamp(0.95rem, 1.4vw, 1.08rem);
+  color: #e2e8f0;
+  line-height: 1.7;
+  font-weight: 400;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero__tagline strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ── CTA Buttons Row ── */
 .hero__cta {
   display: flex;
-  gap: 1rem;
-  margin-top: 0.6rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
-  opacity: 0;
-  animation: heroFadeUp 0.8s ease-out 1.6s forwards;
+  align-items: center;
+  width: 100%;
 }
 
 .hero__btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 2rem;
-  border-radius: 4px;
-  font-size: 0.92rem;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
 }
 
-.hero__btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.35s ease;
+.hero__btn .btn-icon {
+  font-size: 0.95rem;
 }
 
-.hero__btn:hover::after {
-  opacity: 1;
-}
-
-/* Primary button */
+/* Primary View My Work Button */
 .hero__btn--primary {
-  background: #dc143c;
+  background: linear-gradient(135deg, #ff2a55 0%, #dc143c 100%);
   color: #ffffff;
-  border: 2px solid #dc143c;
-}
-
-.hero__btn--primary::after {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    transparent 100%
-  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 6px 20px rgba(255, 42, 85, 0.45);
 }
 
 .hero__btn--primary:hover {
-  background: #c41234;
-  border-color: #c41234;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(220, 20, 60, 0.35);
+  box-shadow: 0 10px 28px rgba(255, 42, 85, 0.65);
+  filter: brightness(1.1);
 }
 
-/* Outline button */
+/* Dedicated CV / Resume Box Button */
+.hero__btn--resume {
+  background: #181824;
+  color: #ffffff;
+  border: 1.5px solid #ff2a55;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(255, 42, 85, 0.15);
+}
+
+.hero__btn--resume:hover {
+  background: rgba(255, 42, 85, 0.22);
+  border-color: #ff5588;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 42, 85, 0.5);
+  color: #ffffff;
+}
+
+.download-bounce {
+  animation: downloadBounce 2s infinite ease-in-out;
+  color: #ff3366;
+}
+
+@keyframes downloadBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+
+/* Reveal Portrait Toggle Button in CTA */
+.hero__btn--reveal {
+  background: #151520;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.hero__btn--reveal:hover {
+  background: #1f1f2e;
+  border-color: #ff2a55;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Get in Touch Button */
 .hero__btn--outline {
-  background: transparent;
-  color: rgba(255, 255, 255, 0.8);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: #151520;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .hero__btn--outline:hover {
-  border-color: #dc143c;
-  color: #dc143c;
+  background: #1f1f2e;
+  color: #ffffff;
+  border-color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
 }
 
 /* ── Social Links ── */

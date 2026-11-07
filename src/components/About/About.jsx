@@ -1,13 +1,21 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaServer, FaDatabase, FaCode, FaShieldAlt, FaGithub } from 'react-icons/fa';
+import {
+  FaServer,
+  FaDatabase,
+  FaCode,
+  FaShieldAlt,
+  FaGithub,
+  FaDownload,
+  FaAward,
+} from 'react-icons/fa';
 import photoImg from '../../assets/photo.png';
 import './About.css';
 
 const stats = [
   { value: '1+', label: 'Year Experience' },
+  { value: 'MCA', label: 'Gold Medalist 🏅' },
   { value: '10+', label: 'Projects Built' },
-  { value: '8+', label: 'Tech Stack Skills' },
   { value: '100%', label: 'Clean Code Focus' },
 ];
 
@@ -67,12 +75,12 @@ const About = () => {
           <div className="about__content">
             <h3 className="about__heading">
               Hi, I'm <span className="highlight">Abhinash Panigrahi</span> — A .NET Developer
-              dedicated to building high-performance web systems.
+              &amp; <span className="highlight">MCA Gold Medalist</span> dedicated to building high-performance web systems.
             </h3>
 
             <p className="about__bio">
               With <strong>1 year of hands-on experience</strong> in enterprise software
-              development, I specialize in crafting robust backend architectures with <strong>C#</strong>,{' '}
+              development and graduating as <strong>Gold Medalist in Masters of Computer Applications (MCA)</strong> from Sri Sri University, I specialize in crafting robust backend architectures with <strong>C#</strong>,{' '}
               <strong>ASP.NET Core</strong>, and database systems like <strong>MS SQL Server</strong> and{' '}
               <strong>PostgreSQL</strong>.
             </p>
@@ -96,10 +104,18 @@ const About = () => {
             {/* Action Buttons */}
             <div className="about__actions">
               <a
+                href="/Abhinash_Panigrahi_Resume.pdf"
+                download="Abhinash_Panigrahi_Resume.pdf"
+                className="btn-primary btn-cv"
+                title="Download Abhinash Panigrahi CV"
+              >
+                <FaDownload /> <span>Download Resume (CV)</span>
+              </a>
+              <a
                 href="https://github.com/AbhinashCodeX"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary"
+                className="btn-outline"
               >
                 <FaGithub /> <span>Explore GitHub</span>
               </a>
