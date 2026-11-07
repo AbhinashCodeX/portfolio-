@@ -13,7 +13,7 @@ const quickLinks = [
 const socialLinks = [
   {
     icon: <FaGithub />,
-    href: 'https://github.com/abhinashpanigrahi',
+    href: 'https://github.com/AbhinashCodeX',
     label: 'GitHub',
   },
   {

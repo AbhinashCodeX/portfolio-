@@ -106,7 +106,7 @@ export default function Hero() {
         {/* Social links */}
         <div className="hero__socials">
           <a
-            href="https://github.com"
+            href="https://github.com/AbhinashCodeX"
             className="hero__social-link"
             target="_blank"
             rel="noopener noreferrer"

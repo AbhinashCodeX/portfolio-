@@ -5,6 +5,7 @@ import {
   FaMapMarkerAlt,
   FaPhone,
   FaLinkedin,
+  FaGithub,
 } from 'react-icons/fa';
 import './Contact.css';
 
@@ -16,22 +17,22 @@ const contactInfo = [
     href: 'mailto:abhinash.panigrahi@email.com',
   },
   {
-    icon: <FaMapMarkerAlt />,
-    label: 'Location',
-    value: 'India',
-    href: null,
-  },
-  {
-    icon: <FaPhone />,
-    label: 'Phone',
-    value: 'Available on request',
-    href: null,
+    icon: <FaGithub />,
+    label: 'GitHub',
+    value: 'github.com/AbhinashCodeX',
+    href: 'https://github.com/AbhinashCodeX',
   },
   {
     icon: <FaLinkedin />,
     label: 'LinkedIn',
     value: 'linkedin.com/in/abhinashpanigrahi',
     href: 'https://linkedin.com/in/abhinashpanigrahi',
+  },
+  {
+    icon: <FaMapMarkerAlt />,
+    label: 'Location',
+    value: 'India',
+    href: null,
   },
 ];
 

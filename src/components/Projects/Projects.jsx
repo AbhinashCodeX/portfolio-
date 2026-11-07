@@ -1,166 +1,223 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaCode } from 'react-icons/fa';
+import { VscCode, VscFileCode } from 'react-icons/vsc';
+import { SiJavascript } from 'react-icons/si';
+import { TbBrandCSharp } from 'react-icons/tb';
 import './Projects.css';
+
+const GITHUB_URL = 'https://github.com/AbhinashCodeX';
 
 const projects = [
   {
     title: 'Employee Management System',
     description:
-      'Full-stack application built with ASP.NET Core Web API and SQL Server backend, featuring a responsive Bootstrap frontend for comprehensive employee data management, CRUD operations, and role-based access.',
-    tags: ['C#', 'ASP.NET Core', 'SQL Server', 'Bootstrap', 'jQuery'],
-    gradient: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-    accent: '#dc143c',
-    github: '#',
-    demo: '#',
+      'Full-stack enterprise application built with ASP.NET Core Web API and MS SQL Server backend, featuring a responsive Bootstrap frontend for employee lifecycle management, role-based access control, and asynchronous CRUD operations.',
+    tags: ['C#', 'ASP.NET Core', 'MS SQL Server', 'Bootstrap', 'jQuery', 'AJAX'],
+    fileName: 'EmployeeController.cs',
+    lang: 'C#',
+    github: GITHUB_URL,
+    demo: GITHUB_URL,
+    codeLines: [
+      { num: 1, content: <><span className="cd-attr">[ApiController]</span></> },
+      { num: 2, content: <><span className="cd-attr">[Route(</span><span className="cd-str">"api/[controller]"</span><span className="cd-attr">)]</span></> },
+      { num: 3, content: <><span className="cd-kw">public class</span> <span className="cd-class">EmployeeController</span> : <span className="cd-type">ControllerBase</span> {'{'}</> },
+      { num: 4, content: <>&nbsp;&nbsp;<span className="cd-kw">private readonly</span> <span className="cd-type">IEmployeeService</span> _service;</> },
+      { num: 5, content: <>&nbsp;&nbsp;<span className="cd-attr">[HttpGet]</span></> },
+      { num: 6, content: <>&nbsp;&nbsp;<span className="cd-kw">public async</span> <span className="cd-type">Task&lt;IActionResult&gt;</span> <span className="cd-func">GetAll</span>() =&gt;</> },
+      { num: 7, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-func">Ok</span>(<span className="cd-kw">await</span> _service.<span className="cd-func">GetActiveEmployeesAsync</span>());</> },
+      { num: 8, content: <>{'}'}</> },
+    ],
   },
   {
     title: 'E-Commerce REST API',
     description:
-      'Robust RESTful API powering an e-commerce platform with JWT-based authentication, product catalog management, shopping cart, and order processing workflows backed by PostgreSQL.',
-    tags: ['C#', 'ASP.NET Core', 'PostgreSQL', 'JWT Auth'],
-    gradient: 'linear-gradient(135deg, #0f0f23 0%, #1a0a2e 50%, #2d1b69 100%)',
-    accent: '#dc143c',
-    github: '#',
-    demo: '#',
+      'High-throughput RESTful API powering an e-commerce platform with JWT-based authentication, product catalog caching, transactional cart checkout, and relational order processing backed by PostgreSQL.',
+    tags: ['C#', 'ASP.NET Core', 'PostgreSQL', 'Entity Framework', 'JWT Auth'],
+    fileName: 'OrderService.cs',
+    lang: 'C#',
+    github: GITHUB_URL,
+    demo: GITHUB_URL,
+    codeLines: [
+      { num: 1, content: <><span className="cd-kw">public class</span> <span className="cd-class">OrderService</span> : <span className="cd-type">IOrderService</span> {'{'}</> },
+      { num: 2, content: <>&nbsp;&nbsp;<span className="cd-kw">public async</span> <span className="cd-type">Task&lt;OrderResult&gt;</span> <span className="cd-func">CheckoutAsync</span>(<span className="cd-type">Guid</span> userId) {'{'}</> },
+      { num: 3, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">await using var</span> tx = <span className="cd-kw">await</span> _db.Database.<span className="cd-func">BeginTransactionAsync</span>();</> },
+      { num: 4, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">var</span> cart = <span className="cd-kw">await</span> _cartRepo.<span className="cd-func">GetByUserIdAsync</span>(userId);</> },
+      { num: 5, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">var</span> order = <span className="cd-type">Order</span>.<span className="cd-func">CreateFromCart</span>(cart);</> },
+      { num: 6, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">await</span> _db.Orders.<span className="cd-func">AddAsync</span>(order);</> },
+      { num: 7, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">await</span> _db.<span className="cd-func">SaveChangesAsync</span>();</> },
+      { num: 8, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">return</span> <span className="cd-type">OrderResult</span>.<span className="cd-func">Success</span>(order.Id);</> },
+      { num: 9, content: <>&nbsp;&nbsp;{'}'}</> },
+      { num: 10, content: <>{'}'}</> },
+    ],
   },
   {
     title: 'Task Tracker Dashboard',
     description:
-      'Real-time task management dashboard with AJAX-powered live updates, drag-and-drop functionality, and a fully responsive design for seamless productivity across all devices.',
-    tags: ['HTML', 'CSS', 'JavaScript', 'AJAX', 'jQuery', 'Bootstrap'],
-    gradient: 'linear-gradient(135deg, #0a192f 0%, #112240 50%, #1d3557 100%)',
-    accent: '#dc143c',
-    github: '#',
-    demo: '#',
+      'Real-time task management system with asynchronous AJAX updates, live DOM manipulation with jQuery, responsive Bootstrap layouts, and modular REST API endpoints for seamless project tracking.',
+    tags: ['HTML5', 'CSS3', 'JavaScript', 'AJAX', 'jQuery', 'Bootstrap'],
+    fileName: 'taskTracker.js',
+    lang: 'JavaScript',
+    github: GITHUB_URL,
+    demo: GITHUB_URL,
+    codeLines: [
+      { num: 1, content: <><span className="cd-comment">// AJAX async task status updater</span></> },
+      { num: 2, content: <><span className="cd-kw">function</span> <span className="cd-func">updateTaskStatus</span>(taskId, status) {'{'}</> },
+      { num: 3, content: <>&nbsp;&nbsp;$.<span className="cd-func">ajax</span>({'{'}</> },
+      { num: 4, content: <>&nbsp;&nbsp;&nbsp;&nbsp;url: <span className="cd-str">`/api/tasks/${'{'}taskId{'}'}/status`</span>,</> },
+      { num: 5, content: <>&nbsp;&nbsp;&nbsp;&nbsp;type: <span className="cd-str">'PATCH'</span>,</> },
+      { num: 6, content: <>&nbsp;&nbsp;&nbsp;&nbsp;contentType: <span className="cd-str">'application/json'</span>,</> },
+      { num: 7, content: <>&nbsp;&nbsp;&nbsp;&nbsp;data: <span className="cd-type">JSON</span>.<span className="cd-func">stringify</span>({'{'} status {'}'}),</> },
+      { num: 8, content: <>&nbsp;&nbsp;&nbsp;&nbsp;success: (res) =&gt; <span className="cd-func">renderKanbanCard</span>(res.data)</> },
+      { num: 9, content: <>&nbsp;&nbsp;{'}'});</> },
+      { num: 10, content: <>{'}'}</> },
+    ],
   },
   {
-    title: 'Portfolio Website',
+    title: 'Dynamic WebGL Portfolio',
     description:
-      'Dynamic and interactive portfolio built with React, featuring Three.js particle effects, smooth Framer Motion animations, and a modern dark-themed design showcasing projects and skills.',
-    tags: ['React', 'Three.js', 'CSS3', 'Framer Motion'],
-    gradient: 'linear-gradient(135deg, #1a0000 0%, #2d0a0a 50%, #4a1525 100%)',
-    accent: '#dc143c',
-    github: '#',
-    demo: '#',
+      'Interactive 3D particle sculpture portfolio hero built with Three.js and React. Implements 78,000 blue-noise dots carved from voxel silhouettes, real-time mouse tracking, and smooth 3.6s sweep reveal.',
+    tags: ['React', 'Three.js', 'C# Voxel Carving', 'WebGL', 'Framer Motion'],
+    fileName: 'SculptureEngine.cs',
+    lang: 'C#',
+    github: GITHUB_URL,
+    demo: GITHUB_URL,
+    codeLines: [
+      { num: 1, content: <><span className="cd-kw">public record</span> <span className="cd-class">DotParticle</span>(<span className="cd-type">Vector3</span> Pos, <span className="cd-type">Vector3</span> Normal, <span className="cd-type">float</span> Brightness);</> },
+      { num: 2, content: <><span className="cd-kw">public class</span> <span className="cd-class">SculptureEngine</span> {'{'}</> },
+      { num: 3, content: <>&nbsp;&nbsp;<span className="cd-kw">public</span> <span className="cd-type">ReadOnlyMemory&lt;DotParticle&gt;</span> <span className="cd-func">BuildMesh</span>(<span className="cd-type">VoxelGrid</span> grid) {'{'}</> },
+      { num: 4, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">var</span> surface = grid.Voxels.<span className="cd-func">Where</span>(v =&gt; v.IsSurface);</> },
+      { num: 5, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">return</span> <span className="cd-func">SamplePoissonDisk</span>(surface, count: <span className="cd-num">78000</span>);</> },
+      { num: 6, content: <>&nbsp;&nbsp;{'}'}</> },
+      { num: 7, content: <>{'}'}</> },
+    ],
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' },
-  },
-};
 
 const Projects = () => {
   return (
     <section id="projects" className="projects-section">
       <div className="projects-container">
-        <motion.div
-          className="projects-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="projects-title">
+        {/* Section Header */}
+        <div className="section-label">
+          <span className="section-label__tag">Portfolio Showcase</span>
+          <h2 className="section-label__title">
             Featured <span className="text-accent">Projects</span>
           </h2>
           <p className="projects-subtitle">
-            A selection of projects that showcase my skills in .NET development,
-            API design, and modern web technologies.
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="projects-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-        >
-          {projects.map((project, index) => (
-            <motion.div
-              className="project-card"
-              key={index}
-              variants={cardVariants}
+            Enterprise .NET backend systems, relational database architectures, and interactive web applications from my GitHub{' '}
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="projects-gh-link"
             >
-              {/* Image / Visual Placeholder */}
-              <div
-                className="project-image"
-                style={{ background: project.gradient }}
-              >
-                <div className="code-pattern">
-                  <span className="code-line">
-                    <span className="ck">public</span>{' '}
-                    <span className="ct">class</span>{' '}
-                    <span className="cn">Program</span>
-                  </span>
-                  <span className="code-line">{'{'}</span>
-                  <span className="code-line">
-                    {'  '}
-                    <span className="ck">static</span>{' '}
-                    <span className="ct">void</span>{' '}
-                    <span className="cf">Main</span>()
-                  </span>
-                  <span className="code-line">{'  {'}</span>
-                  <span className="code-line">
-                    {'    '}Console.<span className="cf">WriteLine</span>
-                    (<span className="cs">"Hello!"</span>);
-                  </span>
-                  <span className="code-line">{'  }'}</span>
-                  <span className="code-line">{'}'}</span>
+              @AbhinashCodeX
+            </a>
+          </p>
+        </div>
+
+        {/* Projects Grid */}
+        <div className="projects-grid">
+          {projects.map((project, index) => (
+            <div className="project-card" key={index}>
+              {/* Aesthetic IDE Window Header */}
+              <div className="project-ide">
+                <div className="project-ide__topbar">
+                  <div className="project-ide__dots">
+                    <span className="dot dot--red" />
+                    <span className="dot dot--yellow" />
+                    <span className="dot dot--green" />
+                  </div>
+                  <div className="project-ide__tab">
+                    <VscFileCode className="tab-icon" />
+                    <span className="tab-name">{project.fileName}</span>
+                  </div>
+                  <span className="project-ide__badge">{project.lang}</span>
                 </div>
-                <div className="project-image-overlay" />
-                {/* Hover Actions */}
+
+                {/* Aesthetic Code Glimpse */}
+                <div className="project-ide__editor">
+                  {project.codeLines.map((line, lIdx) => (
+                    <div className="ide-line" key={lIdx}>
+                      <span className="ide-num">{line.num}</span>
+                      <span className="ide-code">{line.content}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Hover overlay actions */}
                 <div className="project-actions">
                   <a
                     href={project.github}
                     className="project-btn"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="GitHub Repository"
                   >
-                    <FaGithub /> <span>GitHub</span>
+                    <FaGithub /> <span>View on GitHub</span>
                   </a>
                   <a
                     href={project.demo}
                     className="project-btn project-btn--demo"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Live Demo"
                   >
-                    <FaExternalLinkAlt /> <span>Live Demo</span>
+                    <FaExternalLinkAlt /> <span>Source Code</span>
                   </a>
                 </div>
               </div>
 
               {/* Card Body */}
               <div className="project-body">
-                <h3 className="project-title">{project.title}</h3>
+                <div className="project-body__header">
+                  <h3 className="project-title">{project.title}</h3>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project-gh-icon"
+                    title="View GitHub Repository"
+                  >
+                    <FaGithub />
+                  </a>
+                </div>
+
                 <p className="project-description">{project.description}</p>
+
+                {/* Tech Stack Tags */}
                 <div className="project-tags">
-                  {project.tags.map((tag) => (
-                    <span className="project-tag" key={tag}>
+                  {project.tags.map((tag, tIdx) => (
+                    <span className="project-tag" key={tIdx}>
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
+
+        {/* GitHub Callout Banner */}
+        <div className="projects-callout">
+          <div className="projects-callout__content">
+            <FaCode className="callout-icon" />
+            <div>
+              <h4 className="callout-title">Explore more repositories & codebases on GitHub</h4>
+              <p className="callout-subtitle">
+                Check out active repositories, commits, and backend architectures on{' '}
+                <strong>github.com/AbhinashCodeX</strong>
+              </p>
+            </div>
+          </div>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="callout-btn"
+          >
+            <FaGithub /> <span>Visit @AbhinashCodeX</span>
+          </a>
+        </div>
       </div>
     </section>
   );
