@@ -202,6 +202,7 @@ export default function ParticleField({
   canvasRef,
   revealed = false,
   onToggleReveal,
+  onLoaded,
 }) {
   const mouse = useRef({ x: 0, y: 0 });
   const [downloadProgress, setDownloadProgress] = useState(0);
@@ -295,12 +296,18 @@ export default function ParticleField({
             initialPositions,
           });
           setDownloadProgress(100);
-          setTimeout(() => setIsLoaded(true), 400);
+          setTimeout(() => {
+            setIsLoaded(true);
+            onLoaded?.();
+          }, 400);
         }
       } catch (err) {
         console.error('Failed to load dots.bin, using fallback:', err);
         setDownloadProgress(100);
-        setTimeout(() => setIsLoaded(true), 400);
+        setTimeout(() => {
+          setIsLoaded(true);
+          onLoaded?.();
+        }, 400);
       }
     }
 

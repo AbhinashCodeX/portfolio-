@@ -3,7 +3,7 @@
    Full-screen hero section with ParticleField background
    Includes Reveal / Back to dots button per Step 7 of 3-Step Guide
    ═══════════════════════════════════════════════════════════════ */
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import {
   FaGithub,
@@ -21,8 +21,44 @@ import './Hero.css';
 export default function Hero() {
   const canvasRef = useRef(null);
   const [revealed, setRevealed] = useState(false);
+  const autoRevealTimerRef = useRef(null);
+  const hasUserInteracted = useRef(false);
+
+  // Auto-reveal after 5 seconds
+  useEffect(() => {
+    autoRevealTimerRef.current = setTimeout(() => {
+      if (!hasUserInteracted.current) {
+        setRevealed(true);
+      }
+    }, 5000);
+
+    return () => {
+      if (autoRevealTimerRef.current) {
+        clearTimeout(autoRevealTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleDotsLoaded = useCallback(() => {
+    // If user hasn't clicked anything yet, reset timer to exactly 5s from when dots finish assembling
+    if (!hasUserInteracted.current) {
+      if (autoRevealTimerRef.current) {
+        clearTimeout(autoRevealTimerRef.current);
+      }
+      autoRevealTimerRef.current = setTimeout(() => {
+        if (!hasUserInteracted.current) {
+          setRevealed(true);
+        }
+      }, 5000);
+    }
+  }, []);
 
   const handleToggleReveal = () => {
+    hasUserInteracted.current = true;
+    if (autoRevealTimerRef.current) {
+      clearTimeout(autoRevealTimerRef.current);
+      autoRevealTimerRef.current = null;
+    }
     setRevealed((prev) => !prev);
   };
 
@@ -33,6 +69,7 @@ export default function Hero() {
         canvasRef={canvasRef}
         revealed={revealed}
         onToggleReveal={handleToggleReveal}
+        onLoaded={handleDotsLoaded}
       />
 
       {/* Floating Reveal Toggle Button (Step 7 requirement) */}
