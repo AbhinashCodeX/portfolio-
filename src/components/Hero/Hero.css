@@ -1,0 +1,374 @@
+/* ═══════════════════════════════════════════════
+   Hero Section – Dark-themed with crimson accent
+   ═══════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* ── Content overlay ── */
+.hero__content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 860px;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+/* ── Greeting ── */
+.hero__greeting {
+  font-size: clamp(0.9rem, 1.6vw, 1.1rem);
+  font-weight: 500;
+  color: #e2e8f0;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out 0.6s forwards;
+}
+
+.hero__greeting span {
+  color: #ff3366;
+  font-weight: 700;
+}
+
+/* ── Name ── */
+.hero__name {
+  font-family: 'Inter', 'Poppins', sans-serif;
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin: 0;
+  opacity: 0;
+  animation: heroFadeUp 0.9s ease-out 0.85s forwards;
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #f8fafc 55%,
+    #ff3366 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.6));
+}
+
+/* ── Typing animation wrapper ── */
+.hero__roles {
+  font-size: clamp(1.1rem, 2.5vw, 1.65rem);
+  font-weight: 600;
+  color: #ff3366;
+  min-height: 2.2em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out 1.1s forwards;
+  text-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+}
+
+.hero__roles-prefix {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.hero__roles .type-animation-cursor {
+  color: #ff3366;
+}
+
+/* ── Tagline ── */
+.hero__tagline {
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  color: #cbd5e1;
+  max-width: 620px;
+  line-height: 1.7;
+  font-weight: 400;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out 1.35s forwards;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* ── CTA Buttons ── */
+.hero__cta {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out 1.6s forwards;
+}
+
+.hero__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.hero__btn:hover::after {
+  opacity: 1;
+}
+
+/* Primary button */
+.hero__btn--primary {
+  background: #dc143c;
+  color: #ffffff;
+  border: 2px solid #dc143c;
+}
+
+.hero__btn--primary::after {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 100%
+  );
+}
+
+.hero__btn--primary:hover {
+  background: #c41234;
+  border-color: #c41234;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(220, 20, 60, 0.35);
+}
+
+/* Outline button */
+.hero__btn--outline {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero__btn--outline:hover {
+  border-color: #dc143c;
+  color: #dc143c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(220, 20, 60, 0.15);
+}
+
+/* ── Social Links ── */
+.hero__socials {
+  display: flex;
+  gap: 1.2rem;
+  margin-top: 0.4rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out 1.85s forwards;
+}
+
+.hero__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.15rem;
+  transition: all 0.35s ease;
+  text-decoration: none;
+}
+
+.hero__social-link:hover {
+  color: #dc143c;
+  border-color: #dc143c;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(220, 20, 60, 0.2);
+}
+
+/* ── Scroll indicator ── */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s ease-out 2.2s forwards;
+}
+
+.hero__scroll-text {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(
+    to bottom,
+    rgba(220, 20, 60, 0.6),
+    transparent
+  );
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scaleY(0.6);
+    transform-origin: top;
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* ── Shared fade-up animation ── */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .hero__content {
+    padding: 0 1.4rem;
+    gap: 0.9rem;
+  }
+
+  .hero__cta {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .hero__btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero__scroll-indicator {
+    bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__name {
+    font-size: clamp(1.8rem, 10vw, 2.8rem);
+  }
+
+  .hero__roles {
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
+/* ── Floating Reveal Button (Step 7 requirement) ── */
+.hero__reveal-container {
+  position: absolute;
+  top: 90px;
+  right: 28px;
+  z-index: 25;
+}
+
+.hero__reveal-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: rgba(18, 18, 22, 0.75);
+  border: 1px solid rgba(220, 20, 60, 0.45);
+  border-radius: 40px;
+  color: #f5f5f5;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), inset 0 0 12px rgba(220, 20, 60, 0.2);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero__reveal-btn:hover {
+  background: rgba(220, 20, 60, 0.25);
+  border-color: #dc143c;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(220, 20, 60, 0.4);
+}
+
+.hero__reveal-btn.is-active {
+  background: #dc143c;
+  color: #ffffff;
+  border-color: #ff3355;
+  box-shadow: 0 0 25px rgba(220, 20, 60, 0.65);
+}
+
+.hero__reveal-btn .btn-icon.pulse {
+  animation: pulse-glow 2s infinite ease-in-out;
+  color: #ff4d6d;
+}
+
+.hero__reveal-btn.is-active .btn-icon {
+  color: #ffffff;
+}
+
+.hero__btn--reveal {
+  background: rgba(220, 20, 60, 0.15);
+  border: 1px solid #dc143c;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.hero__btn--reveal:hover {
+  background: #dc143c;
+  box-shadow: 0 0 25px rgba(220, 20, 60, 0.5);
+  transform: translateY(-2px);
+}
+
+.hero__content.content-dimmed {
+  opacity: 0 !important;
+  transform: translateY(24px);
+  pointer-events: none;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}

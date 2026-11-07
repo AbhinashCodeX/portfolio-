@@ -1,0 +1,264 @@
+/* ═══════════════════════════════════════════════
+   ParticleField – Hero 3D WebGL Background
+   ═══════════════════════════════════════════════ */
+
+.particle-field-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: #0a0a0c;
+  overflow: hidden;
+}
+
+/* ── Three.js Canvas ── */
+.particle-field-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 3;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* ── Preloader: Dark red ring with download percentage ── */
+.preloader-overlay {
+  position: absolute;
+  inset: 0;
+  background: #0a0a0c;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.preloader-ring {
+  position: relative;
+  width: 130px;
+  height: 130px;
+}
+
+.preloader-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.preloader-ring__bg {
+  fill: none;
+  stroke: rgba(220, 20, 60, 0.15);
+  stroke-width: 4;
+}
+
+.preloader-ring__bar {
+  fill: none;
+  stroke: #ff2a55;
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-dasharray: 264;
+  transition: stroke-dashoffset 0.1s linear;
+  filter: drop-shadow(0 0 10px rgba(255, 42, 85, 0.7));
+}
+
+.preloader-ring__text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.preloader-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.25em;
+  color: #ff3366;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ── "DEVELOPER" watermark text behind bust ── */
+.particle-field__watermark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  width: 100%;
+  text-align: center;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(6rem, 18vw, 22rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: transparent;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.02) 60%,
+    transparent 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  line-height: 1;
+  white-space: nowrap;
+  transition: all 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.particle-field__watermark.crimson-banner {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 42, 85, 0.35) 0%,
+    rgba(180, 15, 45, 0.15) 50%,
+    rgba(10, 10, 12, 0.95) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: drop-shadow(0 0 45px rgba(255, 42, 85, 0.3));
+}
+
+/* ── Real Portrait Photo Layer ── */
+.portrait-photo-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  overflow: hidden;
+  background: #0a0a0c;
+}
+
+.portrait-photo-img {
+  width: 100%;
+  height: 100%;
+  max-height: 96vh;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  filter: contrast(1.05) brightness(1.03);
+}
+
+/* Circle grid mask that dissolves as reveal completes */
+.circle-grid-mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle at center, transparent 38%, rgba(10, 10, 12, 0.95) 85%);
+  background-size: 24px 24px;
+  mix-blend-mode: multiply;
+  transition: transform 0.2s linear, opacity 0.3s ease;
+}
+
+/* ── 3.6-Second Sweeping Band of Light ── */
+.sweep-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  transform: translateY(-50%);
+  z-index: 10;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(255, 60, 90, 0.25) 30%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(220, 20, 60, 0.3) 70%,
+    transparent 100%
+  );
+  box-shadow: 0 0 45px rgba(255, 42, 85, 0.85);
+}
+
+/* ── Film-grain overlay (disabled when revealed for sharpness) ── */
+.particle-field__grain {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+  animation: grainShift 0.4s steps(3) infinite;
+  transition: opacity 0.5s ease;
+}
+
+.particle-field-container.revealed .particle-field__grain {
+  opacity: 0;
+}
+
+@keyframes grainShift {
+  0%   { transform: translate(0, 0); }
+  33%  { transform: translate(-2px, 1px); }
+  66%  { transform: translate(1px, -2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* ── Radial vignette (dimmed when revealed) ── */
+.particle-field__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(5, 5, 8, 0.5) 100%
+  );
+  transition: opacity 0.5s ease;
+}
+
+.particle-field-container.revealed .particle-field__vignette {
+  opacity: 0.2;
+}
+
+/* ── Light-sweep on initial bust load ── */
+.particle-field__sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 42, 85, 0.12) 48%,
+    rgba(255, 90, 120, 0.22) 50%,
+    rgba(255, 42, 85, 0.12) 52%,
+    transparent 70%
+  );
+  opacity: 0;
+}
+
+.particle-field__sweep.swept {
+  animation: sweepAcross 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
+
+@keyframes sweepAcross {
+  0% {
+    opacity: 1;
+    transform: translateX(-120%);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+}

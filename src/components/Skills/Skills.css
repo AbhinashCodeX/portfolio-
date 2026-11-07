@@ -1,0 +1,127 @@
+/* ═══════════════════════════════════════════════
+   Skills Section Styling – High Contrast & Clarity
+   ═══════════════════════════════════════════════ */
+
+.skills {
+  padding: 100px 1.5rem;
+  background: #0a0a0c;
+  position: relative;
+  z-index: 10;
+}
+
+.skills__container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.skills__categories {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* ── Category Header ── */
+.skills__category-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.skills__category-indicator {
+  width: 4px;
+  height: 22px;
+  background: #ff2a55;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgba(255, 42, 85, 0.6);
+}
+
+.skills__category-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+/* ── Skills Grid ── */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Skill Card ── */
+.skills__card {
+  position: relative;
+  background: #13131a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1.4rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  cursor: default;
+  overflow: hidden;
+  transition: all 0.28s ease;
+}
+
+.skills__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 42, 85, 0.45);
+  background: #181822;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 42, 85, 0.15);
+}
+
+.skills__card-icon {
+  font-size: 2.2rem;
+  color: #ff3366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.skills__card:hover .skills__card-icon {
+  transform: scale(1.1);
+  color: #ff5588;
+}
+
+.skills__card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.skills__card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.skills__card-level {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #94a3b8;
+  letter-spacing: 0.2px;
+}
+
+.skills__card-glow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle at top right, rgba(255, 42, 85, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+}
