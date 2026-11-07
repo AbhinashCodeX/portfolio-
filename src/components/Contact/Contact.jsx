@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaPhone,
   FaLinkedin,
   FaGithub,
+  FaPaperPlane,
 } from 'react-icons/fa';
 import './Contact.css';
 
@@ -36,15 +36,6 @@ const contactInfo = [
   },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: 'easeOut' },
-  }),
-};
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -53,6 +44,8 @@ const Contact = () => {
     message: '',
   });
 
+  const [submitted, setSubmitted] = useState(false);
+
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -60,44 +53,32 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Contact form submitted:', formData);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setSubmitted(true);
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    }, 3000);
   };
 
   return (
     <section id="contact" className="contact-section">
       <div className="contact-container">
         {/* Header */}
-        <motion.div
-          className="contact-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="contact-title">
+        <div className="section-label">
+          <span className="section-label__tag">Connect With Me</span>
+          <h2 className="section-label__title">
             Get In <span className="text-accent">Touch</span>
           </h2>
           <p className="contact-subtitle">
-            Have a project in mind or want to collaborate? I'd love to hear from
-            you. Drop me a message and I'll get back to you as soon as possible.
+            Have an enterprise project, .NET backend role, or collaboration in mind? I'd love to connect. Drop me a message below or reach out directly on GitHub.
           </p>
-        </motion.div>
+        </div>
 
         <div className="contact-content">
           {/* Left — Info Cards */}
-          <motion.div
-            className="contact-info"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-60px' }}
-          >
+          <div className="contact-info">
             {contactInfo.map((item, i) => (
-              <motion.div
-                className="contact-info-card"
-                key={item.label}
-                custom={i}
-                variants={fadeUp}
-              >
+              <div className="contact-info-card" key={item.label}>
                 <div className="contact-info-icon">{item.icon}</div>
                 <div className="contact-info-text">
                   <span className="contact-info-label">{item.label}</span>
@@ -114,19 +95,12 @@ const Contact = () => {
                     <span className="contact-info-value">{item.value}</span>
                   )}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Right — Form */}
-          <motion.form
-            className="contact-form"
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-group">
               <input
                 type="text"
@@ -171,10 +145,11 @@ const Contact = () => {
                 className="form-input form-textarea"
               />
             </div>
-            <button type="submit" className="form-submit">
-              Send Message
+            <button type="submit" className="form-submit-btn">
+              <FaPaperPlane />
+              <span>{submitted ? 'Message Sent!' : 'Send Message'}</span>
             </button>
-          </motion.form>
+          </form>
         </div>
       </div>
     </section>

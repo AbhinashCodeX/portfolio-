@@ -237,3 +237,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── About Action Buttons ── */
+.about__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}

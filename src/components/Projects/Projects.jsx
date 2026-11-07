@@ -10,32 +10,74 @@ const GITHUB_URL = 'https://github.com/AbhinashCodeX';
 
 const projects = [
   {
-    title: 'Employee Management System',
+    title: 'ICAI Multi-Branch Platform & CMS',
+    badge: 'Enterprise Professional Project',
     description:
-      'Full-stack enterprise application built with ASP.NET Core Web API and MS SQL Server backend, featuring a responsive Bootstrap frontend for employee lifecycle management, role-based access control, and asynchronous CRUD operations.',
-    tags: ['C#', 'ASP.NET Core', 'MS SQL Server', 'Bootstrap', 'jQuery', 'AJAX'],
-    fileName: 'EmployeeController.cs',
-    lang: 'C#',
+      'A dynamic multi-branch web platform developed for The Institute of Chartered Accountants of India (ICAI). Powers regional council branch websites (CIRC, NIRC, SIRC, EIRC, WIRC) via a centralized CMS for branch-level administration, dynamic announcements, events, opportunities, and real-time monitoring.',
+    tags: [
+      'ASP.NET Core MVC',
+      'C#',
+      'Entity Framework Core',
+      'SQL Server',
+      'jQuery',
+      'AJAX',
+      'Bootstrap 5',
+    ],
+    fileName: 'BranchContentController.cs',
+    lang: 'C# / ASP.NET Core',
     github: GITHUB_URL,
     demo: GITHUB_URL,
     codeLines: [
-      { num: 1, content: <><span className="cd-attr">[ApiController]</span></> },
-      { num: 2, content: <><span className="cd-attr">[Route(</span><span className="cd-str">"api/[controller]"</span><span className="cd-attr">)]</span></> },
-      { num: 3, content: <><span className="cd-kw">public class</span> <span className="cd-class">EmployeeController</span> : <span className="cd-type">ControllerBase</span> {'{'}</> },
-      { num: 4, content: <>&nbsp;&nbsp;<span className="cd-kw">private readonly</span> <span className="cd-type">IEmployeeService</span> _service;</> },
-      { num: 5, content: <>&nbsp;&nbsp;<span className="cd-attr">[HttpGet]</span></> },
-      { num: 6, content: <>&nbsp;&nbsp;<span className="cd-kw">public async</span> <span className="cd-type">Task&lt;IActionResult&gt;</span> <span className="cd-func">GetAll</span>() =&gt;</> },
-      { num: 7, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-func">Ok</span>(<span className="cd-kw">await</span> _service.<span className="cd-func">GetActiveEmployeesAsync</span>());</> },
-      { num: 8, content: <>{'}'}</> },
+      { num: 1, content: <><span className="cd-attr">[Authorize(Roles = </span><span className="cd-str">"BranchAdmin, SuperAdmin"</span><span className="cd-attr">)]</span></> },
+      { num: 2, content: <><span className="cd-kw">public class</span> <span className="cd-class">BranchContentController</span> : <span className="cd-type">Controller</span> {'{'}</> },
+      { num: 3, content: <>&nbsp;&nbsp;<span className="cd-kw">private readonly</span> <span className="cd-type">IIcaiBranchService</span> _branchService;</> },
+      { num: 4, content: <>&nbsp;&nbsp;<span className="cd-attr">[HttpGet]</span></> },
+      { num: 5, content: <>&nbsp;&nbsp;<span className="cd-kw">public async</span> <span className="cd-type">Task&lt;IActionResult&gt;</span> <span className="cd-func">GetBranchPortal</span>(<span className="cd-type">string</span> branchCode) {'{'}</> },
+      { num: 6, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">var</span> content = <span className="cd-kw">await</span> _branchService.<span className="cd-func">GetBranchDataAsync</span>(branchCode);</> },
+      { num: 7, content: <>&nbsp;&nbsp;&nbsp;&nbsp;<span className="cd-kw">return</span> <span className="cd-func">View</span>(<span className="cd-str">"RegionalPortal"</span>, content);</> },
+      { num: 8, content: <>&nbsp;&nbsp;{'}'}</> },
+      { num: 9, content: <>{'}'}</> },
+    ],
+  },
+  {
+    title: 'Schedule Management & Booking System',
+    badge: 'Featured Full-Stack App',
+    description:
+      'A modern role-based scheduling and activity booking system built using ASP.NET Core MVC. Features distinct Admin, Coach, and User portals, Country → State → District cascade bindings via AJAX, coach availability slot scheduling, SweetAlert notifications, and real-time booking history.',
+    tags: [
+      'ASP.NET Core MVC',
+      'C#',
+      'SQL Server',
+      'EF Core',
+      'jQuery AJAX',
+      'Bootstrap 5',
+      'SweetAlert',
+    ],
+    fileName: 'BookingController.cs',
+    lang: 'C# / ASP.NET Core',
+    github: GITHUB_URL,
+    demo: GITHUB_URL,
+    codeLines: [
+      { num: 1, content: <><span className="cd-attr">[HttpPost, ValidateAntiForgeryToken]</span></> },
+      { num: 2, content: <><span className="cd-kw">public async</span> <span className="cd-type">Task&lt;IActionResult&gt;</span> <span className="cd-func">BookActivity</span>(<span className="cd-type">BookingViewModel</span> model) {'{'}</> },
+      { num: 3, content: <>&nbsp;&nbsp;<span className="cd-kw">if</span> (!ModelState.IsValid) <span className="cd-kw">return</span> <span className="cd-func">Json</span>(<span className="cd-kw">new</span> {'{'} success = <span className="cd-kw">false</span> {'}'});</> },
+      { num: 4, content: <>&nbsp;&nbsp;<span className="cd-kw">await using var</span> tx = <span className="cd-kw">await</span> _context.Database.<span className="cd-func">BeginTransactionAsync</span>();</> },
+      { num: 5, content: <>&nbsp;&nbsp;<span className="cd-kw">var</span> slot = <span className="cd-kw">await</span> _context.CoachAvailability.<span className="cd-func">FindAsync</span>(model.SlotId);</> },
+      { num: 6, content: <>&nbsp;&nbsp;slot.IsBooked = <span className="cd-kw">true</span>;</> },
+      { num: 7, content: <>&nbsp;&nbsp;<span className="cd-kw">await</span> _context.<span className="cd-func">SaveChangesAsync</span>();</> },
+      { num: 8, content: <>&nbsp;&nbsp;<span className="cd-kw">await</span> tx.<span className="cd-func">CommitAsync</span>();</> },
+      { num: 9, content: <>&nbsp;&nbsp;<span className="cd-kw">return</span> <span className="cd-func">Json</span>(<span className="cd-kw">new</span> {'{'} success = <span className="cd-kw">true</span>, message = <span className="cd-str">"Booked!"</span> {'}'});</> },
+      { num: 10, content: <>{'}'}</> },
     ],
   },
   {
     title: 'E-Commerce REST API',
+    badge: 'Backend Microservice',
     description:
       'High-throughput RESTful API powering an e-commerce platform with JWT-based authentication, product catalog caching, transactional cart checkout, and relational order processing backed by PostgreSQL.',
     tags: ['C#', 'ASP.NET Core', 'PostgreSQL', 'Entity Framework', 'JWT Auth'],
     fileName: 'OrderService.cs',
-    lang: 'C#',
+    lang: 'C# / Web API',
     github: GITHUB_URL,
     demo: GITHUB_URL,
     codeLines: [
@@ -52,34 +94,13 @@ const projects = [
     ],
   },
   {
-    title: 'Task Tracker Dashboard',
-    description:
-      'Real-time task management system with asynchronous AJAX updates, live DOM manipulation with jQuery, responsive Bootstrap layouts, and modular REST API endpoints for seamless project tracking.',
-    tags: ['HTML5', 'CSS3', 'JavaScript', 'AJAX', 'jQuery', 'Bootstrap'],
-    fileName: 'taskTracker.js',
-    lang: 'JavaScript',
-    github: GITHUB_URL,
-    demo: GITHUB_URL,
-    codeLines: [
-      { num: 1, content: <><span className="cd-comment">// AJAX async task status updater</span></> },
-      { num: 2, content: <><span className="cd-kw">function</span> <span className="cd-func">updateTaskStatus</span>(taskId, status) {'{'}</> },
-      { num: 3, content: <>&nbsp;&nbsp;$.<span className="cd-func">ajax</span>({'{'}</> },
-      { num: 4, content: <>&nbsp;&nbsp;&nbsp;&nbsp;url: <span className="cd-str">`/api/tasks/${'{'}taskId{'}'}/status`</span>,</> },
-      { num: 5, content: <>&nbsp;&nbsp;&nbsp;&nbsp;type: <span className="cd-str">'PATCH'</span>,</> },
-      { num: 6, content: <>&nbsp;&nbsp;&nbsp;&nbsp;contentType: <span className="cd-str">'application/json'</span>,</> },
-      { num: 7, content: <>&nbsp;&nbsp;&nbsp;&nbsp;data: <span className="cd-type">JSON</span>.<span className="cd-func">stringify</span>({'{'} status {'}'}),</> },
-      { num: 8, content: <>&nbsp;&nbsp;&nbsp;&nbsp;success: (res) =&gt; <span className="cd-func">renderKanbanCard</span>(res.data)</> },
-      { num: 9, content: <>&nbsp;&nbsp;{'}'});</> },
-      { num: 10, content: <>{'}'}</> },
-    ],
-  },
-  {
-    title: 'Dynamic WebGL Portfolio',
+    title: 'Dynamic WebGL Portfolio Hero',
+    badge: 'Interactive WebGL',
     description:
       'Interactive 3D particle sculpture portfolio hero built with Three.js and React. Implements 78,000 blue-noise dots carved from voxel silhouettes, real-time mouse tracking, and smooth 3.6s sweep reveal.',
     tags: ['React', 'Three.js', 'C# Voxel Carving', 'WebGL', 'Framer Motion'],
     fileName: 'SculptureEngine.cs',
-    lang: 'C#',
+    lang: 'C# / Algorithms',
     github: GITHUB_URL,
     demo: GITHUB_URL,
     codeLines: [
@@ -105,7 +126,7 @@ const Projects = () => {
             Featured <span className="text-accent">Projects</span>
           </h2>
           <p className="projects-subtitle">
-            Enterprise .NET backend systems, relational database architectures, and interactive web applications from my GitHub{' '}
+            Enterprise .NET backend systems, regional CMS platforms, and role-based web applications from my GitHub{' '}
             <a
               href={GITHUB_URL}
               target="_blank"
@@ -170,7 +191,12 @@ const Projects = () => {
               {/* Card Body */}
               <div className="project-body">
                 <div className="project-body__header">
-                  <h3 className="project-title">{project.title}</h3>
+                  <div>
+                    {project.badge && (
+                      <span className="project-type-badge">{project.badge}</span>
+                    )}
+                    <h3 className="project-title">{project.title}</h3>
+                  </div>
                   <a
                     href={project.github}
                     target="_blank"

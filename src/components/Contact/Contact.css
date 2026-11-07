@@ -15,6 +15,15 @@
   padding: 0 24px;
 }
 
+.contact-subtitle {
+  font-size: 1.05rem;
+  color: #cbd5e1;
+  max-width: 650px;
+  margin: 12px auto 40px;
+  line-height: 1.7;
+  text-align: center;
+}
+
 /* ── Content Layout ── */
 .contact-content {
   display: grid;

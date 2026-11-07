@@ -246,6 +246,21 @@
   margin-bottom: 12px;
 }
 
+.project-type-badge {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #ff3366;
+  background: rgba(255, 42, 85, 0.12);
+  border: 1px solid rgba(255, 42, 85, 0.3);
+  border-radius: 12px;
+  padding: 3px 10px;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
 .project-title {
   font-size: 1.3rem;
   font-weight: 700;

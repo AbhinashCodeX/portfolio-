@@ -1,21 +1,38 @@
 import React from 'react';
-import { FaBriefcase, FaGraduationCap, FaCheckCircle } from 'react-icons/fa';
+import { FaBriefcase, FaGraduationCap, FaCheckCircle, FaLaptopCode } from 'react-icons/fa';
 import './Experience.css';
 
 const experiences = [
   {
     type: 'work',
     role: '.NET Developer',
-    company: 'Enterprise Software Solutions',
-    duration: '2025 – Present · 1 Year',
+    company: 'The Institute of Chartered Accountants of India (ICAI) — Multi-Branch CMS Platform',
+    duration: '2025 – Present · 1 Year Experience',
     location: 'India',
     highlights: [
-      'Architected and deployed enterprise RESTful Web APIs utilizing C# and ASP.NET Core.',
-      'Designed normalized schemas, stored procedures, and LINQ queries in MS SQL Server and PostgreSQL.',
-      'Developed dynamic, asynchronous user interfaces using AJAX, jQuery, Bootstrap 5, HTML5, and CSS3.',
-      'Implemented secure JWT-based token authentication, authorization middleware, and exception handling filters.',
+      'Engineered and maintained dynamic ASP.NET Core MVC multi-branch web platforms for ICAI regional councils (CIRC, NIRC, SIRC, EIRC, WIRC).',
+      'Developed and scaled a Centralized Content Management System (CMS) enabling unified branch administration, monitoring, and dynamic website configuration.',
+      'Built content modules for Announcements, Events, Opportunities, and Background Materials with branch-specific filtering and dynamic data rendering.',
+      'Integrated SQL Server with Entity Framework Core, designing normalized schemas, LINQ queries, and high-performance stored procedures.',
+      'Built responsive, asynchronous client-side operations utilizing JavaScript, jQuery, AJAX, and Bootstrap 5 for zero-refresh interactions.',
+      'Architected reusable layouts, partial views, and components to reliably support multiple high-traffic regional portals.',
     ],
-    tags: ['C#', 'ASP.NET Core', 'MS SQL Server', 'PostgreSQL', 'AJAX', 'jQuery', 'Bootstrap'],
+    tags: ['ASP.NET Core MVC', 'C#', 'Entity Framework Core', 'SQL Server', 'LINQ', 'AJAX', 'jQuery', 'Bootstrap 5'],
+  },
+  {
+    type: 'work',
+    role: 'Full Stack .NET Engineer',
+    company: 'Schedule Management & Activity Booking System',
+    duration: '2024 – 2025 · Featured Project',
+    location: 'Personal Project / GitHub @AbhinashCodeX',
+    highlights: [
+      'Architected an end-to-end role-based booking and scheduling application using ASP.NET Core MVC and Entity Framework Core.',
+      'Engineered distinct portals for Admin, Coach, and User with secure session handling, authentication, and role authorization.',
+      'Implemented hierarchical cascade dropdowns (Country → State → District) using asynchronous jQuery AJAX calls.',
+      'Built flexible coach availability scheduling (dates & time slots) and real-time activity booking pipelines with pagination, sorting, and search.',
+      'Integrated SweetAlert and dynamic Toast notifications with robust client and server-side model validation.',
+    ],
+    tags: ['ASP.NET Core MVC', 'C#', 'Entity Framework Core', 'SQL Server', 'AJAX', 'jQuery', 'Bootstrap 5', 'SweetAlert'],
   },
 ];
 
@@ -27,9 +44,9 @@ const education = [
     duration: '2020 – 2024',
     highlights: [
       'Graduated with strong foundations in Object-Oriented Programming (OOP), Data Structures & Algorithms.',
-      'Completed academic capstone projects focusing on full-stack web applications and relational database design.',
+      'Developed academic full-stack capstone projects focusing on ASP.NET technologies and relational database architecture.',
     ],
-    tags: ['C#', 'OOP', 'RDBMS', 'Data Structures', 'Software Engineering'],
+    tags: ['C#', 'OOP', 'SQL Server', 'Data Structures', 'Software Engineering'],
   },
 ];
 
@@ -52,7 +69,7 @@ const Experience = () => {
           {/* Work Experience */}
           <div className="experience__section-group">
             <h3 className="experience__group-title">
-              <FaBriefcase className="group-icon" /> Work Experience
+              <FaBriefcase className="group-icon" /> Professional Experience
             </h3>
 
             {experiences.map((exp, i) => (

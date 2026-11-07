@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaServer, FaDatabase, FaCode, FaShieldAlt } from 'react-icons/fa';
+import { FaServer, FaDatabase, FaCode, FaShieldAlt, FaGithub } from 'react-icons/fa';
 import photoImg from '../../assets/photo.png';
 import './About.css';
 
@@ -91,6 +91,21 @@ const About = () => {
                   <span className="about__stat-label">{stat.label}</span>
                 </div>
               ))}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="about__actions">
+              <a
+                href="https://github.com/AbhinashCodeX"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+              >
+                <FaGithub /> <span>Explore GitHub</span>
+              </a>
+              <a href="#contact" className="btn-outline">
+                <span>Get In Touch</span>
+              </a>
             </div>
           </div>
         </div>
