@@ -109,7 +109,7 @@ export default function Hero() {
 
             {/* Dedicated CV / Resume Download Box */}
             <a
-              href="/Abhinash_Panigrahi_Resume.pdf"
+              href="./Abhinash_Panigrahi_Resume.pdf"
               download="Abhinash_Panigrahi_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"

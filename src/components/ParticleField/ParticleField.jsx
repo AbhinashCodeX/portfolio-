@@ -220,7 +220,11 @@ export default function ParticleField({
     let canceled = false;
     async function fetchDots() {
       try {
-        const response = await fetch('/dots.bin');
+        const dotUrl = `${import.meta.env.BASE_URL || './'}dots.bin`;
+        let response = await fetch(dotUrl).catch(() => null);
+        if (!response || !response.ok) {
+          response = await fetch('/dots.bin');
+        }
         const contentLength = +(response.headers.get('Content-Length') || 2500000);
         const reader = response.body.getReader();
         let receivedLength = 0;

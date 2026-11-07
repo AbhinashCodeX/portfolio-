@@ -9,7 +9,7 @@ import {
   FaDownload,
   FaAward,
 } from 'react-icons/fa';
-import photoImg from '../../assets/photo.png';
+import photoImg from '../../assets/photo_user_clean.png';
 import './About.css';
 
 const stats = [
@@ -104,7 +104,7 @@ const About = () => {
             {/* Action Buttons */}
             <div className="about__actions">
               <a
-                href="/Abhinash_Panigrahi_Resume.pdf"
+                href="./Abhinash_Panigrahi_Resume.pdf"
                 download="Abhinash_Panigrahi_Resume.pdf"
                 className="btn-primary btn-cv"
                 title="Download Abhinash Panigrahi CV"

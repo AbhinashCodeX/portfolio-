@@ -101,7 +101,7 @@ const Navbar = () => {
           {/* Right Action / Mobile toggle */}
           <div className="navbar__right">
             <a
-              href="/Abhinash_Panigrahi_Resume.pdf"
+              href="./Abhinash_Panigrahi_Resume.pdf"
               download="Abhinash_Panigrahi_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
@@ -161,7 +161,7 @@ const Navbar = () => {
               </ul>
               <div className="navbar__drawer-cta">
                 <a
-                  href="/Abhinash_Panigrahi_Resume.pdf"
+                  href="./Abhinash_Panigrahi_Resume.pdf"
                   download="Abhinash_Panigrahi_Resume.pdf"
                   className="navbar__drawer-resume"
                   target="_blank"
