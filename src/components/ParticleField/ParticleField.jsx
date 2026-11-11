@@ -8,7 +8,7 @@ import React, { useRef, useMemo, useState, useEffect, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
-import portraitImg from '../../assets/photo.png';
+import portraitImg from '../../assets/human_cutout.png';
 import './ParticleField.css';
 
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -205,16 +205,80 @@ export default function ParticleField({
   onLoaded,
 }) {
   const mouse = useRef({ x: 0, y: 0 });
+  const portraitImgRef = useRef(null);
+  const dragRef = useRef({
+    isDragging: false,
+    startX: 0,
+    startY: 0,
+    currentRotY: 0,
+    currentRotX: 0,
+    dragRotY: 0,
+    dragRotX: 0,
+  });
+
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [revealProgress, setRevealProgress] = useState(0);
   const [dotData, setDotData] = useState(null);
   const hasMounted = useRef(false);
 
+  const handlePointerDown = (e) => {
+    if (!revealed) return;
+    dragRef.current.isDragging = true;
+    dragRef.current.startX = e.clientX;
+    dragRef.current.startY = e.clientY;
+  };
+
+  const handlePointerUp = () => {
+    dragRef.current.isDragging = false;
+  };
+
   const handlePointerMove = useCallback((e) => {
     mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
     mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+    if (dragRef.current.isDragging) {
+      const deltaX = e.clientX - dragRef.current.startX;
+      const deltaY = e.clientY - dragRef.current.startY;
+      dragRef.current.dragRotY += deltaX * 0.55; // full 360 degree rotation on drag
+      dragRef.current.dragRotX -= deltaY * 0.25;
+      dragRef.current.startX = e.clientX;
+      dragRef.current.startY = e.clientY;
+    }
   }, []);
+
+  // 3D Interactive Portrait mouse tracking and 360 rotation loop
+  useEffect(() => {
+    let animId;
+    const animatePortrait = () => {
+      if (portraitImgRef.current && revealed && revealProgress >= 0.75) {
+        const d = dragRef.current;
+        let targetRotY = 0;
+        let targetRotX = 0;
+
+        if (d.isDragging) {
+          targetRotY = d.dragRotY;
+          targetRotX = Math.max(-45, Math.min(45, d.dragRotX));
+        } else {
+          // Hover 3D parallax tracking: turns up to ±26° Y and ±14° X toward mouse
+          targetRotY = mouse.current.x * 26 + d.dragRotY;
+          targetRotX = -mouse.current.y * 14 + Math.max(-45, Math.min(45, d.dragRotX));
+        }
+
+        d.currentRotY = lerp(d.currentRotY, targetRotY, 0.08);
+        d.currentRotX = lerp(d.currentRotX, targetRotX, 0.08);
+
+        portraitImgRef.current.style.transform = `perspective(1200px) rotateY(${d.currentRotY.toFixed(2)}deg) rotateX(${d.currentRotX.toFixed(2)}deg)`;
+
+        // Dynamic studio lighting glint matching mouse position
+        const lightShift = 1.03 + mouse.current.x * 0.06;
+        portraitImgRef.current.style.filter = `contrast(1.05) brightness(${lightShift.toFixed(3)})`;
+      }
+      animId = requestAnimationFrame(animatePortrait);
+    };
+    animId = requestAnimationFrame(animatePortrait);
+    return () => cancelAnimationFrame(animId);
+  }, [revealed, revealProgress]);
 
   // Fetch dots.bin with real download percentage
   useEffect(() => {
@@ -348,7 +412,11 @@ export default function ParticleField({
   }, [revealed]);
 
   return (
-    <div className={`particle-field-container ${revealed ? 'revealed' : ''}`} onPointerMove={handlePointerMove}>
+    <div
+      className={`particle-field-container ${revealed ? 'revealed' : ''}`}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+    >
       {/* ── Preloader: Dark red ring with real download percentage ── */}
       {!isLoaded && (
         <div className="preloader-overlay">
@@ -379,6 +447,9 @@ export default function ParticleField({
       {/* ── Layer 2: Real Studio Portrait Photo Layer ── */}
       <div
         className={`portrait-photo-layer ${revealed ? 'active' : ''}`}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerLeave={handlePointerUp}
         style={{
           opacity: revealProgress > 0.01 ? 1 : 0,
           clipPath: revealProgress >= 1
@@ -386,10 +457,13 @@ export default function ParticleField({
             : `polygon(0 0, 100% 0, 100% ${revealProgress * 105}%, 0 ${revealProgress * 105}%)`,
         }}
       >
+        <div className="portrait-photo-glow" />
         <img
+          ref={portraitImgRef}
           src={portraitImg}
           alt="Abhinash Panigrahi - Studio Portrait"
           className="portrait-photo-img"
+          draggable={false}
         />
         {/* Circle grid mask that dissolves as reveal completes */}
         {revealProgress > 0 && revealProgress < 0.95 && (
