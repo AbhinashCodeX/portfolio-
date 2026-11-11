@@ -168,6 +168,70 @@
   box-shadow: 0 8px 30px rgba(255, 42, 85, 0.6);
 }
 
+.form-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.form-submit-btn.success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  box-shadow: 0 4px 25px rgba(16, 185, 129, 0.4);
+}
+
+.btn-spinner {
+  animation: contact-spin 0.9s linear infinite;
+}
+
+@keyframes contact-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.form-status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.5;
+  animation: fadeInStatus 0.3s ease;
+}
+
+@keyframes fadeInStatus {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-status-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.form-status--success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #34d399;
+}
+
+.form-status--error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #f87171;
+}
+
 /* ── Responsive ── */
 @media (max-width: 860px) {
   .contact-content {

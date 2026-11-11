@@ -6,6 +6,9 @@ import {
   FaLinkedin,
   FaGithub,
   FaPaperPlane,
+  FaSpinner,
+  FaCheckCircle,
+  FaExclamationCircle,
 } from 'react-icons/fa';
 import './Contact.css';
 
@@ -50,20 +53,62 @@ const Contact = () => {
     message: '',
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState({
+    submitting: false,
+    success: false,
+    error: null,
+  });
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 3000);
+    setStatus({ submitting: true, success: false, error: null });
+
+    try {
+      const payload = new FormData();
+      payload.append('access_key', 'dbb74f14-b13a-4714-a6d8-762e307f1363');
+      payload.append('name', formData.name);
+      payload.append('email', formData.email);
+      payload.append(
+        'subject',
+        formData.subject
+          ? `[Portfolio] ${formData.subject}`
+          : `New Portfolio Message from ${formData.name}`
+      );
+      payload.append('message', formData.message);
+      payload.append('from_name', `${formData.name} (via Portfolio)`);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: payload,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus({ submitting: false, success: true, error: null });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => {
+          setStatus({ submitting: false, success: false, error: null });
+        }, 6000);
+      } else {
+        setStatus({
+          submitting: false,
+          success: false,
+          error: data.message || 'Failed to deliver message. Please try again or email directly.',
+        });
+      }
+    } catch (err) {
+      console.error('Contact submit error:', err);
+      setStatus({
+        submitting: false,
+        success: false,
+        error: 'Network connection issue. You can also email directly to abhinashpanigrahi9@gmail.com.',
+      });
+    }
   };
 
   return (
@@ -107,6 +152,15 @@ const Contact = () => {
 
           {/* Right — Form */}
           <form className="contact-form" onSubmit={handleSubmit}>
+            {/* Honeypot Spam Protection */}
+            <input
+              type="checkbox"
+              name="botcheck"
+              style={{ display: 'none' }}
+              tabIndex={-1}
+              autoComplete="off"
+            />
+
             <div className="form-group">
               <input
                 type="text"
@@ -116,6 +170,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className="form-input"
+                disabled={status.submitting}
               />
             </div>
             <div className="form-group">
@@ -127,6 +182,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className="form-input"
+                disabled={status.submitting}
               />
             </div>
             <div className="form-group">
@@ -138,6 +194,7 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className="form-input"
+                disabled={status.submitting}
               />
             </div>
             <div className="form-group">
@@ -149,12 +206,45 @@ const Contact = () => {
                 onChange={handleChange}
                 required
                 className="form-input form-textarea"
+                disabled={status.submitting}
               />
             </div>
-            <button type="submit" className="form-submit-btn">
-              <FaPaperPlane />
-              <span>{submitted ? 'Message Sent!' : 'Send Message'}</span>
+            <button
+              type="submit"
+              className={`form-submit-btn ${status.submitting ? 'submitting' : ''} ${status.success ? 'success' : ''}`}
+              disabled={status.submitting}
+            >
+              {status.submitting ? (
+                <>
+                  <FaSpinner className="btn-spinner" />
+                  <span>Sending Message...</span>
+                </>
+              ) : status.success ? (
+                <>
+                  <FaCheckCircle />
+                  <span>Message Sent Successfully!</span>
+                </>
+              ) : (
+                <>
+                  <FaPaperPlane />
+                  <span>Send Message</span>
+                </>
+              )}
             </button>
+
+            {status.success && (
+              <div className="form-status form-status--success" role="alert">
+                <FaCheckCircle className="form-status-icon" />
+                <span>Thank you! Your message has been sent directly to Abhinash's inbox.</span>
+              </div>
+            )}
+
+            {status.error && (
+              <div className="form-status form-status--error" role="alert">
+                <FaExclamationCircle className="form-status-icon" />
+                <span>{status.error}</span>
+              </div>
+            )}
           </form>
         </div>
       </div>
