@@ -49,6 +49,8 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    company: '',
+    inquiryType: 'Full-Time .NET Backend Engineer Role',
     subject: '',
     message: '',
   });
@@ -68,18 +70,35 @@ const Contact = () => {
     setStatus({ submitting: true, success: false, error: null });
 
     try {
+      const now = new Date();
+      const formattedDate = now.toLocaleString('en-US', {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+      });
+
       const payload = new FormData();
       payload.append('access_key', 'dbb74f14-b13a-4714-a6d8-762e307f1363');
       payload.append('name', formData.name);
       payload.append('email', formData.email);
       payload.append(
-        'subject',
-        formData.subject
-          ? `[Portfolio] ${formData.subject}`
-          : `New Portfolio Message from ${formData.name}`
+        'from_name',
+        formData.company
+          ? `${formData.name} (${formData.company})`
+          : `${formData.name} via Portfolio`
       );
-      payload.append('message', formData.message);
-      payload.append('from_name', `${formData.name} (via Portfolio)`);
+      payload.append(
+        'subject',
+        `⚡ [Portfolio Lead] ${formData.inquiryType} – ${formData.subject || formData.name}`
+      );
+      payload.append('Company / Organization', formData.company || 'Not Specified');
+      payload.append('Inquiry / Opportunity Type', formData.inquiryType);
+      payload.append('Subject Line', formData.subject);
+      payload.append('Message Body', formData.message);
+      payload.append('Submitted At', formattedDate);
+      payload.append(
+        'Recipient Profile',
+        'Abhinash Panigrahi | MCA Gold Medalist (.NET Full Stack Engineer)'
+      );
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
@@ -90,7 +109,14 @@ const Contact = () => {
 
       if (data.success) {
         setStatus({ submitting: false, success: true, error: null });
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({
+          name: '',
+          email: '',
+          company: '',
+          inquiryType: 'Full-Time .NET Backend Engineer Role',
+          subject: '',
+          message: '',
+        });
         setTimeout(() => {
           setStatus({ submitting: false, success: false, error: null });
         }, 6000);
@@ -161,35 +187,74 @@ const Contact = () => {
               autoComplete="off"
             />
 
-            <div className="form-group">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="form-input"
-                disabled={status.submitting}
-              />
+            <div className="form-row">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Your Name *"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="form-input"
+                  disabled={status.submitting}
+                />
+              </div>
+              <div className="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Your Email *"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="form-input"
+                  disabled={status.submitting}
+                />
+              </div>
             </div>
-            <div className="form-group">
-              <input
-                type="email"
-                name="email"
-                placeholder="Your Email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="form-input"
-                disabled={status.submitting}
-              />
+
+            <div className="form-row">
+              <div className="form-group">
+                <input
+                  type="text"
+                  name="company"
+                  placeholder="Company / Organization (Optional)"
+                  value={formData.company}
+                  onChange={handleChange}
+                  className="form-input"
+                  disabled={status.submitting}
+                />
+              </div>
+              <div className="form-group">
+                <select
+                  name="inquiryType"
+                  value={formData.inquiryType}
+                  onChange={handleChange}
+                  className="form-input form-select"
+                  disabled={status.submitting}
+                >
+                  <option value="Full-Time .NET Backend Engineer Role">
+                    🎯 Full-Time .NET Engineer Role
+                  </option>
+                  <option value="Contract / Freelance Project">
+                    💼 Contract / Freelance Project
+                  </option>
+                  <option value="Technical Consulting & Architecture">
+                    ⚡ Technical Consulting
+                  </option>
+                  <option value="General Inquiry / Discussion">
+                    💬 General Discussion
+                  </option>
+                </select>
+              </div>
             </div>
+
             <div className="form-group">
               <input
                 type="text"
                 name="subject"
-                placeholder="Subject"
+                placeholder="Subject *"
                 value={formData.subject}
                 onChange={handleChange}
                 required
@@ -197,10 +262,11 @@ const Contact = () => {
                 disabled={status.submitting}
               />
             </div>
+
             <div className="form-group">
               <textarea
                 name="message"
-                placeholder="Your Message"
+                placeholder="Your Message *"
                 rows="5"
                 value={formData.message}
                 onChange={handleChange}
