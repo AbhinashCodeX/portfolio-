@@ -13,8 +13,8 @@ const contactInfo = [
   {
     icon: <FaEnvelope />,
     label: 'Email',
-    value: 'ABHINASHPANIGRAHI9@gmail.com',
-    href: 'mailto:ABHINASHPANIGRAHI9@gmail.com',
+    value: 'abhinashpanigrahi9@gmail.com',
+    href: 'mailto:abhinashpanigrahi9@gmail.com',
   },
   {
     icon: <FaPhone />,

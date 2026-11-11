@@ -203,7 +203,7 @@ export default function Hero() {
             <FaLinkedin />
           </a>
           <a
-            href="mailto:ABHINASHPANIGRAHI9@gmail.com"
+            href="mailto:abhinashpanigrahi9@gmail.com"
             className="hero__social-link"
             aria-label="Email"
           >

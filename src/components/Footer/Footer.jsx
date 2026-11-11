@@ -24,7 +24,7 @@ const socialLinks = [
   },
   {
     icon: <FaEnvelope />,
-    href: 'mailto:ABHINASHPANIGRAHI9@gmail.com',
+    href: 'mailto:abhinashpanigrahi9@gmail.com',
     label: 'Email',
   },
 ];
