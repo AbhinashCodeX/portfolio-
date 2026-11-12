@@ -22,3 +22,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+.env.production
+!.env.example
+
+# Scratch & temporary generation files
+scratch/
+Avatar_Export/
+*.zip
+*.blend1
+
