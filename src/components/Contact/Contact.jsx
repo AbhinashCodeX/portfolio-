@@ -329,7 +329,7 @@ const Contact = () => {
                 <input
                   type="text"
                   name="name"
-                  placeholder="e.g. Baisakhi Dash"
+                  placeholder="e.g. Alex Morgan"
                   value={formData.name}
                   onChange={handleChange}
                   required
