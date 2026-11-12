@@ -28,9 +28,10 @@ const categories = [
     title: 'Backend Engineering',
     skills: [
       { name: 'C#', level: 'Core Language', icon: <TbBrandCSharp /> },
-      { name: 'ASP.NET Core', level: 'Web API & MVC', icon: <SiDotnet /> },
-      { name: 'Entity Framework Core', level: 'ORM & LINQ', icon: <FaCubes /> },
-      { name: 'RESTful Services', level: 'API Architecture', icon: <FaServer /> },
+      { name: 'ASP.NET Core Web API', level: 'REST APIs & Microservices', icon: <SiDotnet /> },
+      { name: 'ASP.NET Core', level: 'MVC & Middleware Architecture', icon: <SiDotnet /> },
+      { name: 'Entity Framework Core', level: 'ORM & Data Modeling', icon: <FaCubes /> },
+      { name: 'RESTful Services', level: 'API Design & Integration', icon: <FaServer /> },
     ],
   },
   {
